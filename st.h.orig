@@ -77,6 +77,8 @@ typedef union {
 	const char *s;
 } Arg;
 
+void autocomplete (const Arg *);
+
 void die(const char *, ...);
 void redraw(void);
 void draw(void);
@@ -124,3 +126,4 @@ extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 extern unsigned int defaultcs;
+extern float alpha;
