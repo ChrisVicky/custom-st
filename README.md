@@ -1,3 +1,8 @@
+# custom st
+
+* fork from [suckless st](https://git.suckless.org/st)
+* patch: `./patches`
+
 st - simple terminal
 --------------------
 st is a simple terminal emulator for X which sucks less.
