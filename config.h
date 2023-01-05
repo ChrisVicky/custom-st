@@ -6,9 +6,10 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *fonts[] = {
-	"JetBrainsMono Nerd Font:pixelsize=18",
 	"CodeNewRoman Nerd Font:pixelsize=18",
-	"Liberation Mono:pixelsize=12:antialias=true:autohint=true",
+	"JetBrainsMono Nerd Font:pixelsize=18",
+	"LXGW WenKai Mono:pixelsize=18",
+	"lIBeration Mono:pixelsize=12:antialias=true:autohint=true",
 	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
 };
 static size_t currentfont = 0;
@@ -214,8 +215,12 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask|ControlMask,            XK_Page_Up,     	kscrollup,      {.i = 3} },
-	{ ShiftMask|ControlMask,            XK_Page_Down,   	kscrolldown,    {.i = 3} },
+	// Zoom in and Out
+	{ TERMMOD,            	XK_plus,     	kscrollup,      {.i = 3} },
+	{ TERMMOD,            	XK_Page_Up,     kscrollup,      {.i = 3} },
+	{ TERMMOD,            	XK_underscore,  kscrolldown,    {.i = 3} },
+	{ TERMMOD,            	XK_Page_Down,   kscrolldown,    {.i = 3} },
+	// Scroll up and Down
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ TERMMOD, 		XK_S, 		cyclefonts, 	{} 	  },
