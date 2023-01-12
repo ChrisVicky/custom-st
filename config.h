@@ -6,13 +6,13 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *fonts[] = {
-	"CodeNewRoman Nerd Font:pixelsize=18",
+  "CaskaydiaCove Nerd Font:pixelsize=18",
 	"JetBrainsMono Nerd Font:pixelsize=18",
 	"LXGW WenKai Mono:pixelsize=18",
-	"lIBeration Mono:pixelsize=12:antialias=true:autohint=true",
-	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
+  "CodeNewRoman Nerd Font Mono:pixelsize=18",
 };
 static size_t currentfont = 0;
+
 static int borderpx = 2;
 
 /*
@@ -23,7 +23,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/zsh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
@@ -185,14 +185,25 @@ static uint forcemousemod = ShiftMask;
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
+ * NOTE: Button Reference: http://xahlee.info/linux/linux_x11_mouse_button_number.html
+ * Simply put here:
+ *  Button1 = left button
+ *  Button2 = middle button (pressing the scroll wheel)
+ *  Button3 = right button
+ *  Button4 = turn scroll wheel up
+ *  Button5 = turn scroll wheel down
+ *  Button6 = push scroll wheel left
+ *  Button7 = push scroll wheel right
+ *  Button8 = 4th button (aka browser backward button)
+ *  Button9 = 5th button (aka browser forward button)
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+	{ XK_ANY_MOD,           Button3, selpaste,       {.i = 0},      1 },
+	{ XK_ANY_MOD, 		      Button1, clipcopy, 	     {.i = 0}, 	1 },
+  /* 添加鼠標滑輪翻頁操作 | scroll wheel to scroll pages  */
+	{ XK_ANY_MOD,           Button4,  kscrollup,      {.i = 3} },
+  { XK_ANY_MOD,           Button5,  kscrolldown,    {.i = 3} },
 };
 
 /* Internal keyboard shortcuts. */
@@ -216,14 +227,15 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	// Zoom in and Out
-	{ TERMMOD,            	XK_plus,     	kscrollup,      {.i = 3} },
 	{ TERMMOD,            	XK_Page_Up,     kscrollup,      {.i = 3} },
-	{ TERMMOD,            	XK_underscore,  kscrolldown,    {.i = 3} },
 	{ TERMMOD,            	XK_Page_Down,   kscrolldown,    {.i = 3} },
 	// Scroll up and Down
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
-	{ TERMMOD, 		XK_S, 		cyclefonts, 	{} 	  },
+	{ TERMMOD,            	XK_plus,     	  kscrollup,      {.i = 3} },
+  { TERMMOD,            	XK_underscore,  kscrolldown,    {.i = 3} },
+
+	{ TERMMOD, 		          XK_S, 		      cyclefonts, 	{} 	  },
 	{ ACMPL_MOD,            XK_slash,       autocomplete,   { .i = ACMPL_WORD        } },
 	{ ACMPL_MOD,            XK_period,      autocomplete,   { .i = ACMPL_FUZZY_WORD  } },
 	{ ACMPL_MOD,            XK_comma,       autocomplete,   { .i = ACMPL_FUZZY       } },
