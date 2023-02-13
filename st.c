@@ -1953,7 +1953,8 @@ strhandle(void)
 				 * TODO if defaultbg color is changed, borders
 				 * are dirty
 				 */
-				redraw();
+				// redraw();
+				tfulldirt();
 			}
 			return;
 		}
